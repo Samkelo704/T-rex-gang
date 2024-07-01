@@ -10,7 +10,9 @@ import org.testng.annotations.*;
 import Application.*;
 
 
+import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +40,7 @@ public class test {
 
       }
 
-      if (url != null && !url.isEmpty()) {
+      if(url != null && !url.isEmpty()){
           driver.get(url);
       }
       spark = new ExtentSparkReporter("src/main/java/Reporting/reports.html");
@@ -49,10 +51,13 @@ public class test {
 
   @Test(priority = 1)
   public void LoginInvalid () throws InterruptedException, IOException {
-      test = reports.createTest("Test login","Try to logIn with Invalid Logins");
+      test = reports.createTest("Testing login ","Try to logIn with Invalid Logins");
       Login lg = new Login(driver);
+      Thread.sleep(2000);
       lg.UserNameInvalid();
+      Thread.sleep(2000);
       lg.PaswordInvalid();
+      Thread.sleep(2000);
       lg.LoginB();
       Thread.sleep(2000);
       WebElement HD = driver.findElement(By.xpath("//*[@id=\"root\"]"));
@@ -173,10 +178,15 @@ public class test {
 
 
     @AfterMethod
-    public void tearDwn(){
+    public void tearDwn() throws IOException {
 
         reports.flush();
-
+        File html = new File("src/main/java/Reporting/reports.html");
+        if(html.exists()&& Desktop.isDesktopSupported()){
+            Desktop.getDesktop().browse(html.toURI());
+        }else {
+            System.out.println("Desktop is not supported");
+        }
         driver.quit();
     }
 }
