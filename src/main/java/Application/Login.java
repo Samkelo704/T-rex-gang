@@ -1,6 +1,6 @@
 package Application;
 
-import dev.failsafe.internal.util.Assert;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -9,12 +9,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -28,7 +26,7 @@ public class Login
     public By LogOut =  By.xpath("//*[@id=\"logout_sidebar_link\"]");
     public By Menu = By .xpath("//*[@id=\"react-burger-menu-btn\"]");
 
-;
+
     public  Login (WebDriver driver)  {
         this.driver = driver;
 
@@ -88,12 +86,5 @@ public void BarM (){
     WebElement LT = wait.until(ExpectedConditions.elementToBeClickable(LogOut));
     LT.click();
 }
-/*<test name="Testing_Firefox">
-    <parameter name="browser" value="firefox"/>
-    <parameter name="url" value= "https://www.saucedemo.com"/>
-    <classes>
-        <class name="test">
-        </class>
-    </classes>
-</test>*/
+
 }
