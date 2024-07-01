@@ -19,4 +19,9 @@ public void clickTheCart(){
 
     driver.findElement(By.xpath("//*[@id=\"shopping_cart_container\"]/a")).click();
 }
+    public void clickOnAnotherProducts()
+    {
+        driver.findElement(By.xpath("//*[@id=\"add-to-cart-sauce-labs-onesie\"]")).click();
+
+    }
 }

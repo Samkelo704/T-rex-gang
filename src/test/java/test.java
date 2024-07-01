@@ -47,20 +47,6 @@ public class test {
     }
 
 
-    public void screenshot () throws IOException {
-        WebElement HD = driver.findElement(By.xpath("//*[@id=\"root\"]"));
-        File source = HD.getScreenshotAs(OutputType.FILE);
-        File DS = new File("src/main/java/utilitis/HomePage.png");
-        FileHelper.copyFile(source,DS);
-
-    }
-
-  /*  public void testTheSway(){
-        WebElement SwayName = driver.findElement(By.className("form_group"));
-        WebElement credit = driver.findElement(RelativeLocator.with(By.className("login_logo")).above(SwayName));
-        System.out.println(credit.getText());
-
-    }*/
   @Test(priority = 1)
   public void LoginInvalid () throws InterruptedException, IOException {
       test = reports.createTest("Test login","Try to logIn with Invalid Logins");
@@ -77,14 +63,15 @@ public class test {
   }
 @Test(priority = 2)
     public void LogIn () throws InterruptedException, IOException {
-        //ClassLoader classLoader = test.class.getClassLoader();
-        //URl resource = classLoader.getResource("BooK1(1).xlsx");
-     //   assert resource !=null;
+
         test = reports.createTest("Testing Login", "Trying to login with valid details");
         WebElement SwayName = driver.findElement(By.className("form_group"));
         WebElement credit = driver.findElement(RelativeLocator.with(By.className("login_logo")).above(SwayName));
         System.out.println(credit.getText());
-
+        WebElement HhD = driver.findElement(By.xpath("//*[@id=\"root\"]"));
+       File sourceH = HhD.getScreenshotAs(OutputType.FILE);
+       File DSh = new File("src/main/java/utilitis/HomePage.png");
+       FileHelper.copyFile(sourceH,DSh);
        String Webname = "Swag Labs";
              if(Webname.matches(credit.getText())) {
               test.log(Status.PASS, "it is on the home page");
@@ -92,10 +79,13 @@ public class test {
           test.log(Status.FAIL, "it failed to locate the home page");
 }
              Login LG = new Login(driver);
+            Thread.sleep(2000);
              LG.UserName();
+             Thread.sleep(2000);
              LG.Pasword();
+             Thread.sleep(2000);
              LG.LoginB();
-             Thread.sleep(5000);
+             Thread.sleep(2000);
         WebElement PrD = driver.findElement(By.xpath("//*[@id=\"root\"]"));
         File PdSC = PrD.getScreenshotAs(OutputType.FILE);
         File pDS = new File("src/main/java/utilitis/ProductPage.png");
@@ -107,9 +97,22 @@ public class test {
                  test.log(Status.FAIL,"it is not in the Product page");
              }
           Products PD = new Products(driver);
+             Thread.sleep(2000);
           PD.clickOnProducts();
+          Thread.sleep(2000);
            PD.clickTheCart();
+           Thread.sleep(2000);
              LG.BarM();
+             Thread.sleep(2000);
+            LG.UserName();
+            Thread.sleep(2000);
+            LG.Pasword();
+            Thread.sleep(2000);
+            LG.LoginB();
+            Thread.sleep(2000);
+             PD.clickOnAnotherProducts();
+             Thread.sleep(2000);
+             PD.clickTheCart();
              Thread.sleep(2000);
              WebElement CH  = driver.findElement(By.xpath("//*[@id=\"root\"]"));
                File chD = CH.getScreenshotAs(OutputType.FILE);
@@ -122,8 +125,9 @@ public class test {
                   test.log(Status.FAIL,"it failed to check out in cart");
               }
            Cart Ct = new Cart(driver);
+              Thread.sleep(2000);
            Ct.check();
-           Thread.sleep(200);
+           Thread.sleep(2000);
         WebElement SD = driver.findElement(By.xpath("//*[@id=\"root\"]"));
         File cD = SD.getScreenshotAs(OutputType.FILE);
         File DC = new File("src/main/java/utilitis/CheckOutPage.png");
@@ -135,9 +139,13 @@ public class test {
             test.log(Status.FAIL,"it failed to check out in cart");
         }
         CheckOut ck = new CheckOut(driver);
+        Thread.sleep(2000);
         ck.fName();
+        Thread.sleep(2000);
         ck.lName();
+        Thread.sleep(2000);
         ck.Code();
+        Thread.sleep(2000);
         ck.BtnCon();
         Thread.sleep(2000);
         WebElement Sp = driver.findElement(By.xpath("//*[@id=\"root\"]"));
@@ -151,9 +159,10 @@ public class test {
     }
 
        Confirmation cn = new Confirmation(driver);
+        Thread.sleep(2000);
         cn.confB();
         Thread.sleep(2000);
-        test.log(Status.FAIL,"Order has been confirmed");
+        test.log(Status.PASS,"Order has been confirmed");
     WebElement Spt = driver.findElement(By.xpath("//*[@id=\"root\"]"));
     File cDt = Sp.getScreenshotAs(OutputType.FILE);
     File DCpt = new File("src/main/java/utilitis/ConfirmationPage.png");
@@ -167,7 +176,7 @@ public class test {
     public void tearDwn(){
 
         reports.flush();
-        reports.getReport();
+
         driver.quit();
     }
 }
